@@ -78,7 +78,6 @@ int main(void)
   /* USER CODE BEGIN Init */
   gpio_init();
   timer_init();
-  timer_irq_init();
 
   __enable_irq(); //Dozvola za globalno korišćenje interrupta
   /* USER CODE END Init */
@@ -102,6 +101,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  /*
+	  //Interrupt
+	  setTimeOut(1000);
+	  if(isTimeOut() == 1)
+	  {
+		  GPIOC->ODR ^= (0b01 << 15);	// Tooglovanje diode XOR
+	  }
+	  */
 
 	  /*
 	  // Da li je taster pritisnut
