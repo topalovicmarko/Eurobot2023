@@ -1,6 +1,7 @@
 "Core/Lib/Peripheries/DAC/dac.o"
 "Core/Lib/Peripheries/GPIO/gpio.o"
 "Core/Lib/Peripheries/TIMER/timer.o"
+"Core/Lib/Peripheries/UART/uart.o"
 "Core/Src/main.o"
 "Core/Src/stm32f4xx_hal_msp.o"
 "Core/Src/stm32f4xx_it.o"

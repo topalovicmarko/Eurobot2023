@@ -20,6 +20,7 @@ SUBDIRS := \
 Core/Lib/Peripheries/DAC \
 Core/Lib/Peripheries/GPIO \
 Core/Lib/Peripheries/TIMER \
+Core/Lib/Peripheries/UART \
 Core/Src \
 Core/Startup \
 Drivers/STM32F4xx_HAL_Driver/Src \

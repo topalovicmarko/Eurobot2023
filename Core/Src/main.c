@@ -26,6 +26,7 @@
 #include "../Lib/Peripheries/GPIO/gpio.h"
 #include "../Lib/Peripheries/TIMER/timer.h"
 #include "../Lib/Peripheries/DAC/dac.h"
+#include "../Lib/Peripheries/UART/uart.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -78,6 +79,7 @@ int main(void) {
 	gpio_init();
 	timer_init();
 	dac_init();
+	uart_init();
 
 	__enable_irq(); //Dozvola za globalno korišćenje interrupta
 	/* USER CODE END Init */
@@ -95,10 +97,15 @@ int main(void) {
 
 	/* USER CODE END 2 */
 
+
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 
+		//Korišćenje UARTa
+		send_char('G');
+		HAL_Delay(500);
+		//echo_test();
 		/*
 		// Korišćenje DAC konvertora
 		start_dac();

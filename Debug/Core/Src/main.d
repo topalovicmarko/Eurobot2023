@@ -27,7 +27,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../Lib/Peripheries/GPIO/gpio.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h \
  ../Core/Src/../Lib/Peripheries/TIMER/timer.h \
- ../Core/Src/../Lib/Peripheries/DAC/dac.h
+ ../Core/Src/../Lib/Peripheries/DAC/dac.h \
+ ../Core/Src/../Lib/Peripheries/UART/uart.h
 
 ../Core/Inc/main.h:
 
@@ -88,3 +89,5 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Src/../Lib/Peripheries/TIMER/timer.h:
 
 ../Core/Src/../Lib/Peripheries/DAC/dac.h:
+
+../Core/Src/../Lib/Peripheries/UART/uart.h:
