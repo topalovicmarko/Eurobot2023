@@ -6,7 +6,7 @@
  */
 
 #include "gpio.h"
-#include "stm32f405xx.h"
+#include "../TIMER/timer.h"
 
 static void gpioB_init (void);
 static void gpioC_init (void);
@@ -39,3 +39,21 @@ static void gpioC_init(void)
 		GPIOC->OTYPER &= ~(0b01 << 5); // Push-pull output
 		//GPIOC->ODR |= (0b01 << 5); // Output -> LED ON
 }
+
+uint8_t debounce()
+{
+	uint8_t temp = GPIOB->IDR & (1 << 0); //External switch
+
+	if(temp == 0)
+	{
+		// sačekati 10ms
+		setTimeOut(10);
+		while(isTimeOut() == 0);
+		if(temp != (GPIOB->IDR & (1 << 0)))
+		{
+			return 0;
+		}
+	}
+	return 1;
+}
+

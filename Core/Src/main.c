@@ -102,6 +102,20 @@ int main(void)
   while (1)
   {
 	  /*
+	  // Sa debouncingom
+	  if (debounce() == 0)
+	  {
+		  GPIOC->ODR ^= (0b01 << 15);
+	  }
+	  */
+	  /*
+	   //Bez debouncinga
+	  if ((GPIOB->IDR & (1 << 0)) == 0)
+	  {
+		  GPIOC->ODR ^= (0b01 << 15);
+	  }
+	  */
+	  /*
 	  //Interrupt
 	  setTimeOut(1000);
 	  if(isTimeOut() == 1)

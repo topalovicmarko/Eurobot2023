@@ -6,7 +6,8 @@ Core/Lib/Peripheries/GPIO/gpio.o: ../Core/Lib/Peripheries/GPIO/gpio.c \
  ../Drivers/CMSIS/Include/cmsis_compiler.h \
  ../Drivers/CMSIS/Include/cmsis_gcc.h \
  ../Drivers/CMSIS/Include/mpu_armv7.h \
- ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
+ ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
+ ../Core/Lib/Peripheries/GPIO/../TIMER/timer.h
 
 ../Core/Lib/Peripheries/GPIO/gpio.h:
 
@@ -23,3 +24,5 @@ Core/Lib/Peripheries/GPIO/gpio.o: ../Core/Lib/Peripheries/GPIO/gpio.c \
 ../Drivers/CMSIS/Include/mpu_armv7.h:
 
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h:
+
+../Core/Lib/Peripheries/GPIO/../TIMER/timer.h:

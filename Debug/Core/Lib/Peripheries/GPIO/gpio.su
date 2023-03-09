@@ -1,3 +1,4 @@
 gpio.c:14:6:gpio_init	8	static
 gpio.c:20:13:gpioB_init	4	static
 gpio.c:28:13:gpioC_init	4	static
+gpio.c:43:9:debounce	16	static
