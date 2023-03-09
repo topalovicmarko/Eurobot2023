@@ -1,0 +1,5 @@
+dac.c:13:6:dac_init	8	static
+dac.c:21:6:dac_gpio_init	4	static
+dac.c:28:6:start_dac	4	static
+dac.c:31:6:setDACValue	16	static
+dac.c:35:6:end_dac	4	static

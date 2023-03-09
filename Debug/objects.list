@@ -1,3 +1,4 @@
+"Core/Lib/Peripheries/DAC/dac.o"
 "Core/Lib/Peripheries/GPIO/gpio.o"
 "Core/Lib/Peripheries/TIMER/timer.o"
 "Core/Src/main.o"

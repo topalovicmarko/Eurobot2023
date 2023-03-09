@@ -11,7 +11,7 @@
 #include "stm32f405xx.h"
 
 //Prototipovi
-void gpio_init (void);
+void gpio_init(void);
 uint8_t debounce();
 
 #endif /* LIB_PERIPHERIES_GPIO_GPIO_H_ */
