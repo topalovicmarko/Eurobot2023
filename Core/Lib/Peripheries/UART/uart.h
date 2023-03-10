@@ -10,11 +10,12 @@
 
 #include "stm32f405xx.h"
 #include <stdint.h>
+#include <stddef.h>
 
-//Prototipovi funkcija
 void uart_init();
-void send_char(volatile unsigned char send_ch);
-void send_str(volatile unsigned char* send_str);
-void echo_test();
+
+void sendChar(unsigned char ch);
+void sendStr(unsigned char* str);
+void sendArray(uint8_t* array, size_t size);
 
 #endif /* LIB_PERIPHERIES_UART_UART_H_ */

@@ -7,93 +7,106 @@
 
 #include "uart.h"
 
-//Prototipovi "privatnih" funkcija
-static void uart_gpio_init();
+void
+uart_init()
+{
+	/*
+	 * PB10 - UART3 TX, AF7
+	 * PB11 - UART3 RX, AF7
+	 *
+	 * USART3 115 200 KBps / sec --> AX 12 je konfigurisan za ovaj protok
+	 */
 
-//Promenljive
-static volatile unsigned char buff_char;
-static volatile unsigned char input_str[30], input_str_size = 0;
+	// 42 MHz na APB1
 
-void uart_init() {
-	uart_gpio_init();
+	// Clock enable
+	RCC->APB1ENR |= RCC_APB1ENR_USART3EN;
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
 
-	RCC->APB1ENR |= (1 << 18);				// USART3 ENABLE
+	// Alt. func. for PB10 & PB11
+	GPIOB->MODER &= ~(0b11 << 10 * 2);
+	GPIOB->MODER |=  (0b10 << 10 * 2);
 
-	USART3->CR1 |= (1 << 13);				// USART ENABLE
+	GPIOB->MODER &= ~(0b11 << 11 * 2);
+	GPIOB->MODER |=  (0b10 << 11 * 2);
 
-	// Baud = fclk/(16xUSARTDIV)
-	// USARTDIV = DIV_Mantissa + (DIV_Fraction / 16)
-	// fclk = 42MHz
-	// Baud = 9600 (standardna vrednost)
-	// 9600 = 42000000/(16*USARTDIV) -> USARTDIV = 273.4375
-	// DIV_Mantissa = 273
-	// DIV_Fraction = 0.4375*16 = 7
-	USART3->BRR |= (7 << 0) | (273 << 4);	// Baud rate reg
+	// Output speed = HIGH
+	GPIOB->OSPEEDR |= (0b11 << 10 * 2);
+	GPIOB->OSPEEDR |= (0b11 << 11 * 2);
 
-	USART3->CR2 |= (1 << 2) | (1 << 3);		// Transmiser and reciever enable
-	USART3->CR2 |= (1 << 5);				// Dozvola interrupt
+	// Alt. f. 7
+	GPIOB->AFR[1] &= ~(15UL << (10 % 8) * 4);
+	GPIOB->AFR[1] |=  (7UL	  << (10 % 8) * 4);
 
-	NVIC->ISER[1] |= (1 << (39-32));		// Interrupt USART3 en
+	GPIOB->AFR[1] &= ~(0b1111 << (11 % 8) * 4);
+	GPIOB->AFR[1] |=  (7	  << (11 % 8) * 4);
+	/*
+	GPIOB->PUPDR  &= ~(0b11 << 10 * 2);
+	GPIOB->PUPDR  |=  (0b01 << 10 * 2);
+	GPIOB->OTYPER |=  (0b1  << 10);
+	*/
+	/*
+	 * 		USART
+	 */
+	USART3->CR1 |= (0b1 << 13); //Enable
+	USART3->CR1 &= ~(0b1 << 12); // 1 start bit, 8 data bits, n stop bits
 
+	/*
+	 * Configuring baudrate
+	 *
+	 * F_clk = 42 MHz
+	 * zeljeni baud: 115200
+	 * Baud = F_clk / (16 * USARTDIV)
+	 * 115200 = 42000000 / (16 * USARTDIV) -> USARTDIV = 42000000 / (16 * 115200)
+	 * USARTDIV = 22.78645833333333 = DIV_Mantissa + (DIV_Fraction / 8 x (2 - OVER8))
+	 * Mantissa => 22
+	 * DIV_Fraction = 16 * 0.78645833333333 -> DIV_Fraction = 12.58 ~ 12 = 0xC
+	 */
+	USART3->BRR =  ( 12 | (22 << 4));
+	USART3->CR1 |= (0b1 << 2); //enable RX
+	USART3->CR1 |= (0b1 << 3); //enable TX
+
+	USART3->CR1 |= (0b1 << 5); // ISR samo na RX
+
+	// BEGIN AX podesavanja
+
+	USART3->CR2 &= ~((0b1 << 11) | (0b1 << 14));
+	USART3->CR3 &= ~((0b1 << 1) | (0b1 << 5));
+	//USART6->CR3 &= ~(0b1 << 3); // half duplex disable
+	USART3->CR3 |=  (0b1 << 3); // half duplex enable
+
+	// END AX podesavanja
+
+	//NVIC->ISER[(int)(39 / 32)] |= (0b1 << (39 % 32));
 }
 
-void uart_gpio_init() {
-
-	//PB10 -> TX
-	//PB11 -> RX
-
-	RCC->AHB1ENR |= (1 << 1);			//GPIOB
-
-	GPIOB->MODER |= (0b10 << 10 * 2);	//Alternative func.
-	GPIOB->MODER |= (0b10 << 11 * 2);	//Alternative func.
-
-	GPIOB->OSPEEDR |= (0b11 << 10 * 2);	//Very high speed
-	GPIOB->OSPEEDR |= (0b11 << 11 * 2);	//Very high speed
-
-	GPIOB->AFR[1] |= (0b111 << 3 * 4);	//USART3 RX HIGH(8-15)
-	GPIOB->AFR[1] |= (0b111 << 4 * 4);	//USART3 TX HIGH(8-15)
+void sendChar(unsigned char ch)
+{
+	USART3->DR = ch;
+	while(! (USART3->SR & (0b1 << 6)));
 }
 
-void send_char(unsigned char send_ch) {
-
-	//USART3->DR koristi se za slanje i prihvatanje podataka
-	USART3->DR = send_ch;
-
-	while((USART2->SR & (1 << 6))){
-		__NOP();
+void sendStr(unsigned char* str)
+{
+	while( *str != '\0')
+	{
+		sendChar(*str++);
 	}
 }
 
-void send_str(volatile unsigned char* send_str) {
-
-	while(*send_str != '\0') {
-		send_char(*send_str);
-		send_str++;
+void sendArray(uint8_t* array, size_t size)
+{
+	for (size_t i = 0; i < size; i++)
+	{
+		sendChar(array[i]);
 	}
 }
 
-void echo_test() {
-		void send_str(input_str);
+void USART3_IRQHandler()
+{
+	if(USART3->SR & (1 << 5))
+	{
 
-		input_str_size = 0;
-		input_str[input_str_size] = '\0';
-}
-
-void USART3_IRQHandler() {
-
-	if (USART3->SR & (1 << 5)) {
-
-		// Vršimo čitanje podatka
-		buff_char = USART3->DR;
-
-		if (input_str_size < 30 - 1) {
-			input_str[input_str_size] = buff_char;
-			input_str_size++;
-			input_str[input_str_size] = '\0';
-		}
-
-		USART3->SR &= ~(1 << 5);
-
+		USART3->SR &= ~(0b1 << 5);
 	}
-
 }

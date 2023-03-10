@@ -103,8 +103,10 @@ int main(void) {
 	while (1) {
 
 		//Korišćenje UARTa
-		send_char('G');
-		HAL_Delay(500);
+		sendChar('P');
+		HAL_Delay(1000);
+		sendChar('G');
+		HAL_Delay(1000);
 		//echo_test();
 		/*
 		// Korišćenje DAC konvertora
