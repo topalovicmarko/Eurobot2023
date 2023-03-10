@@ -102,6 +102,12 @@ void sendArray(uint8_t* array, size_t size)
 	}
 }
 
+char ReadChar()
+{
+    while(!(USART3->SR & (1 << 5))); // Čekaj dok se ne primi karakter
+    return USART3->DR; // Vrati pročitani karakter
+}
+
 void USART3_IRQHandler()
 {
 	if(USART3->SR & (1 << 5))
@@ -110,3 +116,4 @@ void USART3_IRQHandler()
 		USART3->SR &= ~(0b1 << 5);
 	}
 }
+

@@ -17,5 +17,6 @@ void uart_init();
 void sendChar(unsigned char ch);
 void sendStr(unsigned char* str);
 void sendArray(uint8_t* array, size_t size);
+char ReadChar();
 
 #endif /* LIB_PERIPHERIES_UART_UART_H_ */

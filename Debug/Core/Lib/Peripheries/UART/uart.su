@@ -2,4 +2,5 @@ uart.c:11:1:uart_init	4	static
 uart.c:83:6:sendChar	16	static
 uart.c:89:6:sendStr	16	static
 uart.c:97:6:sendArray	24	static
-uart.c:105:6:USART3_IRQHandler	4	static
+uart.c:105:6:ReadChar	4	static
+uart.c:111:6:USART3_IRQHandler	4	static

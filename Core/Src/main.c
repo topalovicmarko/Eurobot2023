@@ -97,23 +97,33 @@ int main(void) {
 
 	/* USER CODE END 2 */
 
-
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 
-		//Korišćenje UARTa
-		sendChar('P');
-		HAL_Delay(1000);
-		sendChar('G');
-		HAL_Delay(1000);
+		//Korišćenje UARTa za primanje podataka
+		char c = ReadChar(); // čitanje jednog karaktera
+		if (c == 'P')
+			{
+			GPIOC->ODR &= ~(0b01 << 15);	// Internal LED ON
+			}
+		else if(c == 'G')
+		{
+			GPIOC->ODR |= (0b01 << 15); 	// Internal LED OFF
+		}
+		//Korišćenje UARTa za slanje
+		/*sendChar('P');
+		 HAL_Delay(1000);
+		 sendChar('G');
+		 HAL_Delay(1000);
+		 */
 		//echo_test();
 		/*
-		// Korišćenje DAC konvertora
-		start_dac();
-		setDACValue(255);
-		end_dac();
-		*/
+		 // Korišćenje DAC konvertora
+		 start_dac();
+		 setDACValue(255);
+		 end_dac();
+		 */
 		/*
 		 // Sa debouncingom
 		 if (debounce() == 0)
