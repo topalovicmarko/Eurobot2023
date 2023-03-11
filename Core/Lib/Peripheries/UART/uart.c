@@ -96,12 +96,12 @@ void sendArray(uint8_t *array, size_t size) {
 }
 
 char ReadChar() {
-	while (!(USART3->SR & (1 << 5))); // Čekaj dok se ne primi karakter
-	if (USART3->SR & (1 << 3)) // Provera da li je došlo do greške pri prijemu
-			{
-		USART3->SR &= ~(1 << 3); // Resetovanje flag-a greške
-		return 0; // Vratiti neku početnu vrednost koja ukazuje na grešku
-	}
+	while (!(USART3->SR & (1 << 5)))
+		{
+		 // Čekaj dok se ne primi karakter
+		__NOP();
+		}
+
 	return USART3->DR; // Vrati pročitani karakter
 }
 
