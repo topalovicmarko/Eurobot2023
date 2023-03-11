@@ -7,9 +7,7 @@
 
 #include "uart.h"
 
-void
-uart_init()
-{
+void uart_init() {
 	/*
 	 * PB10 - UART3 TX, AF7
 	 * PB11 - UART3 RX, AF7
@@ -18,17 +16,16 @@ uart_init()
 	 */
 
 	// 42 MHz na APB1
-
 	// Clock enable
 	RCC->APB1ENR |= RCC_APB1ENR_USART3EN;
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;
 
 	// Alt. func. for PB10 & PB11
 	GPIOB->MODER &= ~(0b11 << 10 * 2);
-	GPIOB->MODER |=  (0b10 << 10 * 2);
+	GPIOB->MODER |= (0b10 << 10 * 2);
 
 	GPIOB->MODER &= ~(0b11 << 11 * 2);
-	GPIOB->MODER |=  (0b10 << 11 * 2);
+	GPIOB->MODER |= (0b10 << 11 * 2);
 
 	// Output speed = HIGH
 	GPIOB->OSPEEDR |= (0b11 << 10 * 2);
@@ -36,15 +33,15 @@ uart_init()
 
 	// Alt. f. 7
 	GPIOB->AFR[1] &= ~(15UL << (10 % 8) * 4);
-	GPIOB->AFR[1] |=  (7UL	  << (10 % 8) * 4);
+	GPIOB->AFR[1] |= (7UL << (10 % 8) * 4);
 
 	GPIOB->AFR[1] &= ~(0b1111 << (11 % 8) * 4);
-	GPIOB->AFR[1] |=  (7	  << (11 % 8) * 4);
+	GPIOB->AFR[1] |= (7 << (11 % 8) * 4);
 	/*
-	GPIOB->PUPDR  &= ~(0b11 << 10 * 2);
-	GPIOB->PUPDR  |=  (0b01 << 10 * 2);
-	GPIOB->OTYPER |=  (0b1  << 10);
-	*/
+	 GPIOB->PUPDR  &= ~(0b11 << 10 * 2);
+	 GPIOB->PUPDR  |=  (0b01 << 10 * 2);
+	 GPIOB->OTYPER |=  (0b1  << 10);
+	 */
 	/*
 	 * 		USART
 	 */
@@ -62,7 +59,7 @@ uart_init()
 	 * Mantissa => 22
 	 * DIV_Fraction = 16 * 0.78645833333333 -> DIV_Fraction = 12.58 ~ 12 = 0xC
 	 */
-	USART3->BRR =  ( 12 | (22 << 4));
+	USART3->BRR = (12 | (22 << 4));
 	USART3->CR1 |= (0b1 << 2); //enable RX
 	USART3->CR1 |= (0b1 << 3); //enable TX
 
@@ -72,46 +69,44 @@ uart_init()
 
 	USART3->CR2 &= ~((0b1 << 11) | (0b1 << 14));
 	USART3->CR3 &= ~((0b1 << 1) | (0b1 << 5));
-	//USART6->CR3 &= ~(0b1 << 3); // half duplex disable
-	USART3->CR3 |=  (0b1 << 3); // half duplex enable
+	USART6->CR3 &= ~(0b1 << 3); // half duplex disable
+	//USART3->CR3 |=  (0b1 << 3); // half duplex enable
 
 	// END AX podesavanja
 
 	//NVIC->ISER[(int)(39 / 32)] |= (0b1 << (39 % 32));
 }
 
-void sendChar(unsigned char ch)
-{
+void sendChar(unsigned char ch) {
 	USART3->DR = ch;
-	while(! (USART3->SR & (0b1 << 6)));
+	while (!(USART3->SR & (0b1 << 6)))
+		;
 }
 
-void sendStr(unsigned char* str)
-{
-	while( *str != '\0')
-	{
+void sendStr(unsigned char *str) {
+	while (*str != '\0') {
 		sendChar(*str++);
 	}
 }
 
-void sendArray(uint8_t* array, size_t size)
-{
-	for (size_t i = 0; i < size; i++)
-	{
+void sendArray(uint8_t *array, size_t size) {
+	for (size_t i = 0; i < size; i++) {
 		sendChar(array[i]);
 	}
 }
 
-char ReadChar()
-{
-    while(!(USART3->SR & (1 << 5))); // Čekaj dok se ne primi karakter
-    return USART3->DR; // Vrati pročitani karakter
+char ReadChar() {
+	while (!(USART3->SR & (1 << 5))); // Čekaj dok se ne primi karakter
+	if (USART3->SR & (1 << 3)) // Provera da li je došlo do greške pri prijemu
+			{
+		USART3->SR &= ~(1 << 3); // Resetovanje flag-a greške
+		return 0; // Vratiti neku početnu vrednost koja ukazuje na grešku
+	}
+	return USART3->DR; // Vrati pročitani karakter
 }
 
-void USART3_IRQHandler()
-{
-	if(USART3->SR & (1 << 5))
-	{
+void USART3_IRQHandler() {
+	if (USART3->SR & (1 << 5)) {
 
 		USART3->SR &= ~(0b1 << 5);
 	}
