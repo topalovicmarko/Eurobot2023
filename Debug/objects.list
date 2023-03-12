@@ -1,4 +1,5 @@
 "Core/Lib/Peripheries/DAC/dac.o"
+"Core/Lib/Peripheries/ENCODER/encoder.o"
 "Core/Lib/Peripheries/GPIO/gpio.o"
 "Core/Lib/Peripheries/TIMER/timer.o"
 "Core/Lib/Peripheries/UART/uart.o"

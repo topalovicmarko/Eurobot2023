@@ -18,6 +18,7 @@ OBJCOPY_BIN :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Core/Lib/Peripheries/DAC \
+Core/Lib/Peripheries/ENCODER \
 Core/Lib/Peripheries/GPIO \
 Core/Lib/Peripheries/TIMER \
 Core/Lib/Peripheries/UART \

@@ -14,6 +14,7 @@ RM := rm -rf
 -include Core/Lib/Peripheries/UART/subdir.mk
 -include Core/Lib/Peripheries/TIMER/subdir.mk
 -include Core/Lib/Peripheries/GPIO/subdir.mk
+-include Core/Lib/Peripheries/ENCODER/subdir.mk
 -include Core/Lib/Peripheries/DAC/subdir.mk
 -include subdir.mk
 -include objects.mk

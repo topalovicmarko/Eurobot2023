@@ -1,8 +1,8 @@
 timer.c:35:6:timer_init	8	static
-timer.c:42:6:tim2_init	4	static,ignoring_inline_asm
+timer.c:42:6:tim13_init	4	static,ignoring_inline_asm
 timer.c:63:9:isTimeFlag95s	4	static
 timer.c:68:9:isTimeFlag100s	4	static
 timer.c:73:10:getSysTime	4	static
 timer.c:78:6:setTimeOut	16	static
 timer.c:87:9:isTimeOut	4	static
-timer.c:92:6:TIM2_IRQHandler	4	static
+timer.c:92:6:TIM8_UP_TIM13_IRQHandler	4	static

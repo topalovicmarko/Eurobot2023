@@ -101,21 +101,21 @@ int main(void) {
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 		/*
-		//Korišćenje UARTa za primanje podataka
-		char c = ReadChar(); // čitanje jednog karaktera
-		if (c == 'P') {
-			GPIOC->ODR &= ~(0b01 << 15);	// Internal LED ON
-		} else if (c == 'G') {
-			GPIOC->ODR |= (0b01 << 15); 	// Internal LED OFF
-		}
-		*/
-
+		 //Korišćenje UARTa za primanje podataka
+		 char c = ReadChar(); // čitanje jednog karaktera
+		 if (c == 'P') {
+		 GPIOC->ODR &= ~(0b01 << 15);	// Internal LED ON
+		 } else if (c == 'G') {
+		 GPIOC->ODR |= (0b01 << 15); 	// Internal LED OFF
+		 }
+		 */
+		/*
 		 //Korišćenje UARTa za slanje
 		 sendChar('P');
 		 HAL_Delay(1000);
 		 sendChar('G');
 		 HAL_Delay(1000);
-
+		 */
 		//echo_test();
 		/*
 		 // Korišćenje DAC konvertora
@@ -144,8 +144,8 @@ int main(void) {
 		 {
 		 GPIOC->ODR ^= (0b01 << 15);	// Tooglovanje diode XOR
 		 }
-		 */
 
+		 */
 		/*
 		 // Da li je taster pritisnut
 		 if((GPIOB->IDR & (1 << 0)) == 0)
