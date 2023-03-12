@@ -11,6 +11,7 @@
 #include "stm32f405xx.h"
 #include <stdint.h>
 #include <stddef.h>
+#include "../TIMER/timer.h"
 
 void uart_init();
 

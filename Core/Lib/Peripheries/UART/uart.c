@@ -96,14 +96,16 @@ void sendArray(uint8_t *array, size_t size) {
 }
 
 char ReadChar() {
-	while (!(USART3->SR & (1 << 5)))
-		{
-		 // Čekaj dok se ne primi karakter
-		__NOP();
-		}
-
-	return USART3->DR; // Vrati pročitani karakter
+	setTimeOut(1000); // Vremensko ograničenje, u milisekundama
+    while (!(USART3->SR & (1 << 5))) {
+    	 if(isTimeOut() == 1) {
+            return '\0'; // Ako je isteklo vreme, vrati '\0' kao grešku
+        }
+    }
+    return USART3->DR; // Vrati pročitani karakter
 }
+
+
 
 void USART3_IRQHandler() {
 	if (USART3->SR & (1 << 5)) {
