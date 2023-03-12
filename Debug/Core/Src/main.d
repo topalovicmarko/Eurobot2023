@@ -29,7 +29,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../Lib/Peripheries/TIMER/timer.h \
  ../Core/Src/../Lib/Peripheries/DAC/dac.h \
  ../Core/Src/../Lib/Peripheries/UART/uart.h \
- ../Core/Src/../Lib/Peripheries/UART/../TIMER/timer.h
+ ../Core/Src/../Lib/Peripheries/UART/../TIMER/timer.h \
+ ../Core/Src/../Lib/Peripheries//ENCODER/encoder.h
 
 ../Core/Inc/main.h:
 
@@ -94,3 +95,5 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Src/../Lib/Peripheries/UART/uart.h:
 
 ../Core/Src/../Lib/Peripheries/UART/../TIMER/timer.h:
+
+../Core/Src/../Lib/Peripheries//ENCODER/encoder.h:

@@ -23,10 +23,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 #include "../Lib/Peripheries/GPIO/gpio.h"
 #include "../Lib/Peripheries/TIMER/timer.h"
 #include "../Lib/Peripheries/DAC/dac.h"
 #include "../Lib/Peripheries/UART/uart.h"
+#include "../Lib/Peripheries//ENCODER/encoder.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -80,6 +82,7 @@ int main(void) {
 	timer_init();
 	dac_init();
 	uart_init();
+	encoder_init();
 
 	__enable_irq(); //Dozvola za globalno korišćenje interrupta
 	/* USER CODE END Init */

@@ -1,0 +1,5 @@
+encoder.c:16:6:encoder_init	8	static
+encoder.c:23:13:tim2_init	16	static
+encoder.c:70:13:tim3_init	16	static
+encoder.c:112:13:tim4_init	16	static
+encoder.c:154:13:tim8_init	16	static
