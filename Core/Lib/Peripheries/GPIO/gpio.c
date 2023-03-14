@@ -37,6 +37,27 @@ static void gpioC_init(void) {
 	//GPIOC->ODR |= (0b01 << 5); // Output -> LED ON
 }
 
+void ENC_enable(void)
+{
+	//M1 M2 ENCODER enable
+	RCC->AHB1ENR |= (0b01 << 2);
+	const uint8_t pin_8 = 8;
+	GPIOC->MODER &= ~(0b11 << 2*pin_8);
+	GPIOC->MODER |= (0b01 << 2*pin_8);
+	GPIOC->OTYPER &= ~(0b01 << pin_8);
+	GPIOC->PUPDR &= ~(0b11 << 2 * pin_8);
+	GPIOC->ODR &= ~(0b01 << pin_8);
+	//EXT ENC1 ENC2 enable
+	RCC->AHB1ENR |= (0b01 << 1);
+	const uint8_t pin_3 = 3;
+	GPIOB->MODER &= ~(0b11 << 2*pin_3);
+	GPIOB->MODER |= (0b01 << 2*pin_3);
+	GPIOB->OTYPER &= ~(0b01 << pin_3);
+	GPIOB->PUPDR &= ~(0b11 << 2 * pin_3);
+	GPIOB->ODR &= ~(0b01 << pin_3);
+
+}
+
 uint8_t debounce() {
 	uint8_t temp = GPIOB->IDR & (1 << 0); //External switch
 

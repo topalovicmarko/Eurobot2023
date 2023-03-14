@@ -12,7 +12,6 @@
 #include "stm32f405xx.h"
 
 //Prototipovi funkcija
-
 void encoder_init();
 
 #endif /* LIB_PERIPHERIES_ENCODER_ENCODER_H_ */

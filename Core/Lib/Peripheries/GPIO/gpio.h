@@ -13,5 +13,6 @@
 //Prototipovi
 void gpio_init(void);
 uint8_t debounce();
+void ENC_enable(void);
 
 #endif /* LIB_PERIPHERIES_GPIO_GPIO_H_ */
