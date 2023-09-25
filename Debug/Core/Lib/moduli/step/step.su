@@ -1,0 +1,4 @@
+step.c:12:6:step_init	4	static
+step.c:34:6:steper_pun_ugao	16	static
+step.c:44:6:steper_suprotan_ugao	16	static
+step.c:54:6:steper_stop	4	static

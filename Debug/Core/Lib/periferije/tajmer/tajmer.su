@@ -1,0 +1,10 @@
+tajmer.c:16:6:tajmer_init	8	static
+tajmer.c:21:13:init_tim10	16	static,ignoring_inline_asm
+tajmer.c:43:13:init_tim11	16	static,ignoring_inline_asm
+tajmer.c:63:6:TIM1_BRK_TIM9_IRQHandler	4	static
+tajmer.c:70:6:TIM1_UP_TIM10_IRQHandler	8	static
+tajmer.c:78:6:tajmer_delay_mikro	24	static,ignoring_inline_asm
+tajmer.c:85:6:step_delay	24	static,ignoring_inline_asm
+tajmer.c:91:6:tajmer_delay	24	static,ignoring_inline_asm
+tajmer.c:97:10:get_sistemsko_vreme_mikro	4	static
+tajmer.c:100:10:get_sistemsko_vreme	4	static

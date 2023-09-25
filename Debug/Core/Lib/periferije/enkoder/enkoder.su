@@ -1,0 +1,5 @@
+enkoder.c:13:6:enkoder_init	8	static
+enkoder.c:18:13:init_tim3	16	static
+enkoder.c:72:9:enkoder_brzina	16	static
+enkoder.c:79:13:init_tim4	16	static
+enkoder.c:135:9:enkoder_brzina2	16	static

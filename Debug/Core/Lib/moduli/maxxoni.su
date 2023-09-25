@@ -1,0 +1,8 @@
+maxxoni.c:14:6:maxxoni_init	8	static
+maxxoni.c:20:13:mode_init	16	static
+maxxoni.c:68:13:pwm_tim2_init	16	static,ignoring_inline_asm
+maxxoni.c:115:13:pwm_tim5_init	16	static,ignoring_inline_asm
+maxxoni.c:162:6:okretanje_m1	16	static
+maxxoni.c:168:6:okretanje_m2	16	static
+maxxoni.c:174:6:motor1_smer	16	static
+maxxoni.c:188:6:motor2_smer	16	static

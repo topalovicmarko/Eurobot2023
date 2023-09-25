@@ -1,0 +1,6 @@
+gpio.c:13:6:gpio_init	8	static
+gpio.c:18:13:init_port_a	16	static
+gpio.c:28:13:init_port_c	16	static
+gpio.c:43:6:cinc_stanje	16	static
+gpio.c:51:6:gpio_led_stanje	24	static
+gpio.c:58:6:gpio_taster_stanje	16	static

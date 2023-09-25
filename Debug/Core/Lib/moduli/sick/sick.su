@@ -1,0 +1,6 @@
+sick.c:10:6:sick_init	16	static
+sick.c:51:6:sickLF	16	static
+sick.c:60:6:sickMID	16	static
+sick.c:69:6:sickRF	16	static
+sick.c:78:6:sickLB	16	static
+sick.c:87:6:sickRB	16	static

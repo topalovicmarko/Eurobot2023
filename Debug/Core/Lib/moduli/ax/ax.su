@@ -1,0 +1,16 @@
+ax.c:28:6:zatvaranje_zadnjh_vrata	16	static,ignoring_inline_asm
+ax.c:44:6:otvaranje_zadnjh_vrata	16	static,ignoring_inline_asm
+ax.c:61:6:loptice_pocetni_polozaj	16	static,ignoring_inline_asm
+ax.c:74:6:prva_loptica	16	static,ignoring_inline_asm
+ax.c:87:6:druga_loptica	16	static,ignoring_inline_asm
+ax.c:98:6:treca_loptica	16	static,ignoring_inline_asm
+ax.c:110:6:prednja_leva_vrata_otvorena	16	static,ignoring_inline_asm
+ax.c:122:6:prednja_leva_vrata_zatvorena	16	static,ignoring_inline_asm
+ax.c:134:6:prednja_leva_vrata_hvatanje	16	static,ignoring_inline_asm
+ax.c:147:6:prednja_desna_vrata_hvatanje	16	static,ignoring_inline_asm
+ax.c:160:6:prednja_desna_vrata_otvorena	16	static,ignoring_inline_asm
+ax.c:173:6:prednja_desna_vrata_zatvorena	16	static,ignoring_inline_asm
+ax.c:186:6:sva_vrata_otvorena	8	static
+ax.c:192:6:hvatanje_kolaca	8	static
+ax.c:197:6:otpustanje_kolaca	8	static
+ax.c:202:6:sva_vrata_zatvorena	8	static

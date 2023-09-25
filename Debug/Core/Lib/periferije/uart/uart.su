@@ -1,0 +1,9 @@
+uart.c:30:6:uart_init	8	static
+uart.c:34:13:init_usart6	16	static
+uart.c:85:6:USART6_IRQHandler	8	static
+uart.c:92:13:upis_u_bafer6	16	static
+uart.c:103:6:uart_send_byte6	16	static,ignoring_inline_asm
+uart.c:110:6:uart_send_str6	16	static
+uart.c:117:13:parseBafer	4	static
+uart.c:220:6:servo_control	32	static
+uart.c:242:10:get_ugao	4	static
